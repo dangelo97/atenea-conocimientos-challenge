@@ -1,0 +1,30 @@
+{
+  "name": "atenea-conocimientos-challenge",
+  "version": "1.0.0",
+  "description": "Automatizacion de pruebas",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx bddgen && npx playwright test --headed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dangelo97/atenea-conocimientos-challenge.git"
+  },
+  "keywords": [
+    "playwright"
+  ],
+  "author": "Dangelo Ferrieri",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dangelo97/atenea-conocimientos-challenge/issues"
+  },
+  "homepage": "https://github.com/dangelo97/atenea-conocimientos-challenge#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.45.1",
+    "@types/node": "^20.14.10",
+    "playwright-bdd": "^6.6.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
