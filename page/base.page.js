@@ -8,6 +8,7 @@ export class BasePage {
     }
 
     async ingresoBaseUrl(){
+        console.log("baseUrl" + this.baseUrl)
         await this.page.goto(this.baseUrl);
     }
 
