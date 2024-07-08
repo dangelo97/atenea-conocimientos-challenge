@@ -133,4 +133,3 @@ dist
 /blob-report/
 /playwright/.cache/
 .features-gen
-package-lock.json
