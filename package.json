@@ -4,7 +4,8 @@
   "description": "Automatizacion de pruebas",
   "main": "index.js",
   "scripts": {
-    "test": "npx bddgen && npx playwright test --headed"
+    "test:headed": "npx bddgen && npx playwright test --headed",
+    "test:headless": "npx bddgen && npx playwright test"
   },
   "repository": {
     "type": "git",
