@@ -30,4 +30,7 @@ exports.HomePage = class HomePage{
         await expect(this.usuarioButton).toHaveText(text)
     }
 
+    async validoUsuarioLogueado(){
+        await expect(this.usuarioButton).toBeVisible()
+    }
 }
