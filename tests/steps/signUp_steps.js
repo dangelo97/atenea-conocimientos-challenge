@@ -15,12 +15,12 @@ Given('Navego al sitio', async ({ page }) => {
     await basePage.ingresoBaseUrl();
 });
 
-When('Hago clic en el botón {string} en el encabezado', async ({ page }, boton) => {
+When('Hago click en el botón {string} en el encabezado', async ({ page }, boton) => {
     const homePage = new HomePage(page);
     await homePage.clickIngresar();
 });
 
-When('Hago clic en el botón {string}', async ({ page }, boton) => {
+When('Hago click en el botón {string}', async ({ page }, boton) => {
     const loginPage = new LoginPage(page);
     const homePage = new HomePage(page);
     switch (boton) {
@@ -32,6 +32,9 @@ When('Hago clic en el botón {string}', async ({ page }, boton) => {
             break;
         case "Buscar":
             await homePage.clickBuscar();
+            break;
+        case "Añadir al carrito":
+            await homePage.clickAñadirCarrito();
             break;
         default:
             throw new Error("Boton no cubierto para el step.")
@@ -70,7 +73,7 @@ When('Relleno el campo {string} con {string}', async ({ page }, campo, texto) =>
     }
 });
 
-When('Hago clic en el botón {string} de la seccion Sign Up', async ({ page }, boton) => {
+When('Hago click en el botón {string} de la seccion Sign Up', async ({ page }, boton) => {
     const signUpPage = new SignUpPage(page);
     await signUpPage.clickRegistrarse();
 });

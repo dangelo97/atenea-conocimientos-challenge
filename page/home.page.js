@@ -9,8 +9,14 @@ exports.HomePage = class HomePage {
         this.carritoButton = page.locator('#link-carrito');
         this.usuarioButton = page.locator('#username');
         this.nombreProducto = page.locator('#producto-0');
-        this.nombreProductoDestacado = page.locator('.active.carousel-item')
-        this.siguienteProductoBtn = page.locator('.carousel-control-next-icon')
+        this.nombreProductoDestacado = page.locator('.active.carousel-item');
+        this.siguienteProductoBtn = page.locator('.carousel-control-next-icon');
+        this.añadirCarritoBtn = page.locator('#add-to-cart-button');
+        this.productoCarrito = page.locator('.col-md-3');
+        this.cantidadField = page.locator('#select-qty-668d1db50bdc0ed2470b33fc');
+        this.cantidadPedidoCarrito = page.locator('.badge.rounded-pill.bg-success');
+        this.iconoEliminar = page.locator('#button-remove-668d1db50bdc0ed2470b33fc');
+        this.carritoVacioTxt = page.locator('.fade.alert.alert-info.show')
     }
 
     async clickIngresar() {
@@ -45,13 +51,12 @@ exports.HomePage = class HomePage {
     }
 
     async validoProductoCarrusel(producto) {
-        const maxAttempts = 5; // Número máximo de intentos
+        const maxAttempts = 5;
 
         for (let attempts = 0; attempts <= maxAttempts; attempts++) {
-            
+
             try {
-                //await expect(this.nombreProductoDestacado).toContainText(producto)
-                // Espera 2 segundos para ver si el botón desaparece
+
                 await this.page.waitForTimeout(1000);
                 const isVisible = await expect(this.nombreProductoDestacado).toContainText(producto);
                 if (!isVisible) {
@@ -62,12 +67,43 @@ exports.HomePage = class HomePage {
                 }
             } catch (error) {
                 console.log("Ocurrió un error:", error);
-                //attempts++;
+
                 await this.siguienteProductoBtn.click()
                 if (attempts == maxAttempts) {
                     console.log("Número máximo de intentos alcanzado. El producto aún no está presente.");
                 }
             }
         }
+    }
+
+    async clickProducto() {
+        await this.page.waitForTimeout(1000);
+        await this.nombreProducto.click()
+    }
+
+    async clickAñadirCarrito() {
+        await expect(this.añadirCarritoBtn).toBeVisible()
+        await this.page.waitForTimeout(1000);
+        await this.añadirCarritoBtn.click()
+    }
+
+    async validoProductoCarrito(producto) {
+        await expect(this.productoCarrito).toContainText(producto)
+    }
+
+    async agregoMasProductos(){
+        await this.cantidadField.selectOption('2');
+    }
+
+    async validoCantidadProductos(){
+        await expect(this.cantidadPedidoCarrito).toContainText('2')
+    }
+     
+    async clickIconoEliminar(){
+        await this.iconoEliminar.click();
+    }
+
+    async validoCarritoVacio(){
+        await expect(this.carritoVacioTxt).toContainText('Tu carrito está vacío ')
     }
 }
