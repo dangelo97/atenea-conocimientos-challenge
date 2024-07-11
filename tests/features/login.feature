@@ -14,14 +14,12 @@ Feature: Automatizacion del inicio de sesion
         And Hago clic en el botón "Ingresar"
         Then Debería ver un mensaje de error "Invalid email or password"
 
-
     Scenario: Inicio de sesión con solo el correo
         Given Navego al sitio
         When Hago clic en el botón "Ingresar" en el encabezado
         And Relleno el campo "Dirección de Email" con "daferrieri1905@gmail.com"
         And Hago clic en el botón "Ingresar"
         Then Debería ver un mensaje de error "Invalid email or password"
-
 
     Scenario: Inicio de sesión con correo y contraseña inválidos
         Given Navego al sitio
