@@ -22,13 +22,16 @@ When('Hago clic en el botón {string} en el encabezado', async ({ page }, boton)
 
 When('Hago clic en el botón {string}', async ({ page }, boton) => {
     const loginPage = new LoginPage(page);
-
+    const homePage = new HomePage(page);
     switch (boton) {
         case "Registrarse":
             await loginPage.clickRegistrarse();
             break;
         case "Ingresar":
             await loginPage.clickIngresar();
+            break;
+        case "Buscar":
+            await homePage.clickBuscar();
             break;
         default:
             throw new Error("Boton no cubierto para el step.")
@@ -48,6 +51,7 @@ When('Relleno el campo {string}', async ({ page }, email) => {
 
 When('Relleno el campo {string} con {string}', async ({ page }, campo, texto) => {
     const signUpPage = new SignUpPage(page);
+    const homePage = new HomePage(page);
     switch (campo) {
         case "Contraseña":
             await signUpPage.ingresoContraseña(texto);
@@ -57,6 +61,9 @@ When('Relleno el campo {string} con {string}', async ({ page }, campo, texto) =>
             break;
         case "Dirección de Email":
             await signUpPage.ingresoEmail(texto);
+            break;
+        case "Buscar Productos":
+            await homePage.ingresarProducto(texto);
             break;
         default:
             throw new Error("Caso no cubierto para el step.")

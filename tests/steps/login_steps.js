@@ -7,8 +7,7 @@ import { createBdd } from 'playwright-bdd';
 const { Given, When, Then } = createBdd();
 const { expect } = require('@playwright/test');
 
-Then('Valido que se inicio sesión con exito', async ({page}) => {
+Then('Valido que se inicio sesión con exito', async ({ page }) => {
     const homePage = new HomePage(page);
     await homePage.validoUsuarioLogueado();
 });
- 
