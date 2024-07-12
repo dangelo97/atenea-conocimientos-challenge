@@ -1,3 +1,4 @@
+@regression
 Feature: Automatizacion de busqueda y agregar al carrito de los productos
 
     Scenario: Valido la busqueda de un producto
@@ -10,21 +11,13 @@ Feature: Automatizacion de busqueda y agregar al carrito de los productos
         And Hago click en el botón "Buscar"
         Then Valido que se muestra el producto "Sony PlayStation 4" en los resultados
 
-    Scenario Outline: Valido el funcionamiento de la navegación del carrusel
+    Scenario: Valido el funcionamiento de la navegación del carrusel
         Given Navego al sitio
         When Hago click en el botón "Ingresar" en el encabezado
         And Relleno el campo "Dirección de Email" con "daferrieri1905@gmail.com"
         And Relleno el campo "Contraseña" con "local123"
         And Hago click en el botón "Ingresar"
-        Then Valido que es visible el producto destado "<Producto>" del carrusel
-
-        Examples:
-            | Producto                |
-            | Apple Watch Series 7    |
-            | Sony PlayStation 5      |
-            | Canon EOS R5            |
-            | Microsoft Xbox Series X |
-            | Sony Alpha a7 III       |
+        Then Valido que son visibles los productos destados del carrusel
 
     Scenario: Valido que se añada el producto al carrito
         Given Navego al sitio

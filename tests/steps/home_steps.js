@@ -8,27 +8,9 @@ Then('Valido que se muestra el producto {string} en los resultados', async ({ pa
     await homePage.validoNombreProducto(producto);
 });
 
-Then('Valido que es visible el producto destado {string} del carrusel', async ({ page }, producto) => {
+Then('Valido que son visibles los productos destados del carrusel', async ({ page }) => {
     const homePage = new HomePage(page);
-    switch (producto) {
-        case "Apple Watch Series 7":
-            await homePage.validoProductoCarrusel(producto);
-            break;
-        case "Sony PlayStation 5":
-            await homePage.validoProductoCarrusel(producto);
-            break;
-        case "Canon EOS R5":
-            await homePage.validoProductoCarrusel(producto);
-            break;
-        case "Microsoft Xbox Series X":
-            await homePage.validoProductoCarrusel(producto);
-            break;
-        case "Sony Alpha a7 III":
-            await homePage.validoProductoCarrusel(producto);
-            break;
-        default:
-            throw new Error("Caso no cubierto para el step.")
-    }
+    await homePage.validoProductoCarrusel2();
 });
 
 When('Hago click en el producto {string}', async ({ page }, producto) => {

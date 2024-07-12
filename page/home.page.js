@@ -10,7 +10,9 @@ exports.HomePage = class HomePage {
         this.usuarioButton = page.locator('#username');
         this.nombreProducto = page.locator('#producto-0');
         this.nombreProductoDestacado = page.locator('.active.carousel-item');
+        this.nombreProductoDestacadoTxt = '.active.carousel-item';
         this.siguienteProductoBtn = page.locator('.carousel-control-next-icon');
+        this.siguienteProductoBtnTxt = '.carousel-control-next-icon';
         this.añadirCarritoBtn = page.locator('#add-to-cart-button');
         this.productoCarrito = page.locator('.col-md-3');
         this.cantidadField = page.locator('#select-qty-668d1db50bdc0ed2470b33fc');
@@ -50,29 +52,25 @@ exports.HomePage = class HomePage {
         await expect(this.nombreProducto).toContainText(producto)
     }
 
-    async validoProductoCarrusel(producto) {
-        const maxAttempts = 5;
+    async validoProductoCarrusel2() {
+        const regex = /^[A-Za-z\s]+ [A-Za-z\s\d]+ \(\$\d{1,5}\.\d{2}\)$/;
 
-        for (let attempts = 0; attempts <= maxAttempts; attempts++) {
+        let productCount = 0;
+        const maxProducts = 4;
 
-            try {
+        while (productCount < maxProducts) {
 
-                await this.page.waitForTimeout(1000);
-                const isVisible = await expect(this.nombreProductoDestacado).toContainText(producto);
-                if (!isVisible) {
-                    console.log("Se encontro el producto");
-                    break;
-                } else {
-                    console.log("El producto aun no se encuentra. Intentando nuevamente...");
-                }
-            } catch (error) {
-                console.log("Ocurrió un error:", error);
+            await this.page.waitForSelector(this.nombreProductoDestacadoTxt);
 
-                await this.siguienteProductoBtn.click()
-                if (attempts == maxAttempts) {
-                    console.log("Número máximo de intentos alcanzado. El producto aún no está presente.");
-                }
-            }
+            const productText = await this.page.$eval(this.nombreProductoDestacadoTxt, el => el.textContent.trim());
+
+            expect(productText).toMatch(regex);
+            productCount++
+
+            const nextButton = await this.page.$(this.siguienteProductoBtnTxt);
+
+            await nextButton.click();
+            await this.page.waitForTimeout(1000);
         }
     }
 
@@ -91,19 +89,19 @@ exports.HomePage = class HomePage {
         await expect(this.productoCarrito).toContainText(producto)
     }
 
-    async agregoMasProductos(){
+    async agregoMasProductos() {
         await this.cantidadField.selectOption('2');
     }
 
-    async validoCantidadProductos(){
+    async validoCantidadProductos() {
         await expect(this.cantidadPedidoCarrito).toContainText('2')
     }
-     
-    async clickIconoEliminar(){
+
+    async clickIconoEliminar() {
         await this.iconoEliminar.click();
     }
 
-    async validoCarritoVacio(){
+    async validoCarritoVacio() {
         await expect(this.carritoVacioTxt).toContainText('Tu carrito está vacío ')
     }
 }
