@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test:headed": "npx bddgen && npx playwright test --headed",
+    "test:regression": "npx bddgen --tags @regression && npx playwright test",
     "test:headless": "npx bddgen && npx playwright test"
   },
   "repository": {
