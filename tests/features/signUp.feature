@@ -1,3 +1,4 @@
+@regression
 Feature: Automatización del Registro de Atenea
 
     Scenario: Registro exitoso con datos válidos

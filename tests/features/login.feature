@@ -1,3 +1,4 @@
+@regression
 Feature: Automatizacion del inicio de sesion
 
     Scenario: Inicio de sesión exitoso con credenciales válidas
